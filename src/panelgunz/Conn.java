@@ -25,7 +25,7 @@ public class Conn {
         
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conexion = (Connection) DriverManager.getConnection("jdbc:sqlserver://127.0.0.1:1433;databaseName=teste;allowMultiQueries=true", "sa", "demon123");
+            conexion = (Connection) DriverManager.getConnection("jdbc:sqlserver://127.0.0.1:1433;databaseName=teste;allowMultiQueries=true", "sa", "123456789");
             sentencia = (Statement) conexion.createStatement( ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY );
             if (conexion!=null){
                 connected=true;
@@ -40,9 +40,9 @@ public class Conn {
     	try_c();
         try{
             sentencia = (Statement) conexion.createStatement();
-            ResultSet rlst = sentencia.executeQuery("SELECT * FROM Login,Account where Account.UserID='" + USERID + "' and Login.Password='" + PASSWORD + "' and Account.UGradeID=255");
+            ResultSet rlst = sentencia.executeQuery("SELECT * FROM Account,Login where Login.UserID='" + USERID + "' and Login.Password='" + PASSWORD + "' and Account.UGradeID=255");
             if (rlst.next() & logged == false) {
-            	 UGradeID = rlst.getInt(8);
+            	 UGradeID = rlst.getInt("UGradeID");
                 System.out.println("Logged Grade:" + UGradeID);
                 logged = true;
             }else if(logged == true){

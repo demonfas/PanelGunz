@@ -143,27 +143,6 @@ public class Login extends JFrame {
 		T_USERID.setColumns(10);
 		
 		JButton BLogin = new JButton("Login");
-		BLogin.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				Color cl = new Color(255,255,255);
-				BLogin.setBackground(cl);
-				repaint();
-			}
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Conn.login = false;
-                conn.login(T_USERID.getText(), T_PASSWORD.getText());
-                /*if (conn.logged == false & conn.login == true) {
-                    
-                }else */if (Conn.logged == true & Conn.login == false){
-                    U_C = Integer.toString(conn.Users_conected());
-                    panel1.setVisible(true);
-                    panel1.setLocationRelativeTo(null);
-                    setVisible(false);
-                }
-			}
-		});
 		BLogin.setBackground(Color.WHITE);
 		BLogin.setForeground(Color.BLACK);
 		BLogin.setFocusPainted(false);
@@ -173,7 +152,7 @@ public class Login extends JFrame {
 		panel_1.add(BLogin);
 		
 		T_PASSWORD = new JPasswordField();
-		T_PASSWORD.setText("trustedpwpw");
+		T_PASSWORD.setText("123456");
 		T_PASSWORD.setBorder(new MatteBorder(0, 0, 2, 0, (Color) new Color(0, 0, 0)));
 		T_PASSWORD.setBounds(62, 67, 178, 32);
 		panel_1.add(T_PASSWORD);
@@ -193,5 +172,20 @@ public class Login extends JFrame {
 		label_1.setIcon(new ImageIcon(((new ImageIcon("X:\\\\Disco D\\\\Jason\\\\Lenguajes\\\\Java\\\\test\\\\PanelGunz\\\\src\\\\Resource\\\\Imgs\\\\password.png")).getImage()).getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH)));
 		label_1.setBounds(21, 67, 32, 32);
 		panel_1.add(label_1);
+		BLogin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+                conn.login(T_USERID.getText(), new String(T_PASSWORD.getPassword()));
+				Conn.login = false;
+                if (Conn.logged == false & Conn.login == true) {
+                    
+                }else if (Conn.logged == true & Conn.login == false){
+                    U_C = Integer.toString(conn.Users_conected());
+                    panel1.setVisible(true);
+                    panel1.setLocationRelativeTo(null);
+                    setVisible(false);
+                }
+			}
+		});
 	}
 }
