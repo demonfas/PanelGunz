@@ -562,7 +562,31 @@ public class Conn {
     	}
     }    
     
-String setSex(int Sex) {
+    public void EditUserID (JComboBox<?> Type, JTextField txtUserEdit, JTextField txtNewUserID) {
+    	
+    }
+
+    public void EditPassword (JComboBox<?> Type, JTextField txtPasswordEdit, JTextField txtNewPassword) {
+    	
+    }
+    
+    public void EditRange (JComboBox<?> Type, JTextField txtUserID, JComboBox<?> Range) {
+    	
+    }
+    
+    public void SendItemAllAccounts (JTextField txtItemID, JTextField txtDays) {
+    	
+    }
+    
+    public void SendItemAccount (JComboBox Type, JTextField txtUserID, JTextField txtItemID, JTextField txtDays	) {
+    	
+    }
+    
+    public void EditCountry (JComboBox Type, JTextField txtUserID, JTextField txtNewCountry) {
+    	
+    }
+    
+    String setSex(int Sex) {
     	if(Sex == 0)
     		return "Male";
     	else

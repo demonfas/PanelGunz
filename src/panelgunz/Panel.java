@@ -92,6 +92,10 @@ public class Panel extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JPanel PClan = new JPanel();
+		PClan.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		PClan.setVisible(false);
+		
 		JPanel PEditAccounts = new JPanel();
 		PEditAccounts.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		PEditAccounts.setVisible(false);
@@ -309,6 +313,35 @@ public class Panel extends JFrame {
 		JButton button_5 = new JButton("Cambiar");
 		button_5.setBounds(579, 31, 89, 23);
 		panel_9.add(button_5);
+		PClan.setBackground(Color.WHITE);
+		PClan.setBounds(265, 5, 719, 565);
+		contentPane.add(PClan);
+		PClan.setLayout(null);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(10, 30, 699, 524);
+		PClan.add(scrollPane_2);
+		
+		Table_Clan = new JTable();
+		Table_Clan.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"N\u00B0", "CLID", "Name", "Master", "Points", "Win", "Lose"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Integer.class, Integer.class, String.class, String.class, Object.class, Object.class, Object.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		scrollPane_2.setViewportView(Table_Clan);
+		
+		JLabel lblNewLabel = new JLabel("Clans");
+		lblNewLabel.setBounds(10, 11, 46, 14);
+		PClan.add(lblNewLabel);
 		
 		JPanel PCoins = new JPanel();
 		PCoins.setBorder(new LineBorder(Color.LIGHT_GRAY));
@@ -583,10 +616,6 @@ public class Panel extends JFrame {
 		LConectados.setBounds(10, 68, 230, 22);
 		PUser.add(LConectados);
 		
-		JPanel PClan = new JPanel();
-		PClan.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		PClan.setVisible(false);
-		
 		JPanel PLogin = new JPanel();
 		PLogin.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		PLogin.setVisible(false);
@@ -620,35 +649,6 @@ public class Panel extends JFrame {
 		lblNewLabel_1.setBounds(10, 11, 46, 14);
 		PLogin.add(lblNewLabel_1);
 		Table_Login.getTableHeader().setReorderingAllowed(false);
-		PClan.setBackground(Color.WHITE);
-		PClan.setBounds(265, 5, 719, 565);
-		contentPane.add(PClan);
-		PClan.setLayout(null);
-		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(10, 30, 699, 524);
-		PClan.add(scrollPane_2);
-		
-		Table_Clan = new JTable();
-		Table_Clan.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"N\u00B0", "CLID", "Name", "Master", "Points", "Win", "Lose"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, Integer.class, String.class, String.class, Object.class, Object.class, Object.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-		});
-		scrollPane_2.setViewportView(Table_Clan);
-		
-		JLabel lblNewLabel = new JLabel("Clans");
-		lblNewLabel.setBounds(10, 11, 46, 14);
-		PClan.add(lblNewLabel);
 		
 		JPanel PButtons = new JPanel();
 		PButtons.setBackground(Color.LIGHT_GRAY);
