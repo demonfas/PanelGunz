@@ -21,6 +21,7 @@ public class Conn {
     Connection conexion;
     Statement sentencia = null;
     public static boolean connected=false,logged=false, login = false;
+    Action a = new Action();
     public boolean try_c(){
         
         try {
@@ -496,14 +497,16 @@ public class Conn {
 	    	    			sentencia = conexion.createStatement();
 	    	    			if(!txtInfoDonatorCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + Integer.parseInt(txtNewDCoins.getText()) + "where UserID='" + txtUserDonatorCEdit.getText() + "'");
-	    	    				System.out.println(txtNewDCoins.getText()); JOptionPane.showMessageDialog(null, "DonatorCoins Actualizados");
+	    	    				System.out.println(txtNewDCoins.getText()); 
+	    	    				JOptionPane.showMessageDialog(null, "DonatorCoins Actualizados");
 	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de DonatorCoins con UserID");return;}
 	    				break;
 	    				case 1:
 	    	    			sentencia = conexion.createStatement();
 	    	    			if(!txtInfoDonatorCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + Integer.parseInt(txtNewDCoins.getText()) + "where AID=" + Integer.parseInt(txtUserDonatorCEdit.getText()));
-	    	    				System.out.println(txtNewDCoins.getText()); JOptionPane.showMessageDialog(null, "DonatorCoins Actualizados");
+	    	    				System.out.println(txtNewDCoins.getText()); 
+	    	    				JOptionPane.showMessageDialog(null, "DonatorCoins Actualizados");
 	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de DonatorCoins con AID");return;}
 	    				break;
 	    				case 2:
@@ -517,7 +520,8 @@ public class Conn {
 	    	    			}catch(SQLException e) {JOptionPane.showMessageDialog(null, "2.1No se pudo obtener UserID " + e);return;}
 	    	    			if(!txtInfoDonatorCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + Integer.parseInt(txtNewDCoins.getText()) + "where UserID='" + _UserID + "'");
-	    	    				System.out.println(txtNewDCoins.getText()); JOptionPane.showMessageDialog(null, "DonatorCoins Actualizados");
+	    	    				System.out.println(txtNewDCoins.getText()); 
+	    	    				JOptionPane.showMessageDialog(null, "DonatorCoins Actualizados");
 	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de DonatorCoins con Character");return;}
 	    				break;
 	    			}
@@ -533,14 +537,16 @@ public class Conn {
 	    	    			sentencia = conexion.createStatement();
 	    	    			if(!txtInfoEventCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET EventCoins=" + Integer.parseInt(txtNewECoins.getText()) + "where UserID='" + txtUserEventCEdit.getText() + "'");
-	    	    				System.out.println(txtNewECoins.getText()); JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
+	    	    				System.out.println(txtNewECoins.getText()); 
+	    	    				JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
 	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de EventCoins con UserID");return;}
 	    				break;
 	    				case 1:
 	    	    			sentencia = conexion.createStatement();
 	    	    			if(!txtInfoEventCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET EventCoins=" + Integer.parseInt(txtNewECoins.getText()) + "where AID=" + Integer.parseInt(txtUserEventCEdit.getText()));
-	    	    				System.out.println(txtNewECoins.getText()); JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
+	    	    				System.out.println(txtNewECoins.getText()); 
+	    	    				JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
 	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de EventCoins con AID");return;}
 	    				break;
 	    				case 2:
@@ -554,7 +560,8 @@ public class Conn {
 	    	    			}catch(SQLException e) {JOptionPane.showMessageDialog(null, "2.1No se pudo obtener UserID " + e);return;}
 	    	    			if(!txtInfoEventCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET EventCoins=" + Integer.parseInt(txtNewECoins.getText()) + "where UserID='" + _UserID + "'");
-	    	    				System.out.println(txtNewECoins.getText()); JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
+	    	    				System.out.println(txtNewECoins.getText()); 
+	    	    				JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
 	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de EventCoins con Character");return;}
 	    				break;
 	    			}
@@ -563,7 +570,30 @@ public class Conn {
     }    
     
     public void EditUserID (JComboBox<?> Type, JTextField txtUserEdit, JTextField txtNewUserID) {
-    	
+    	if(try_c()) {
+    		try {
+				if((txtUserEdit.getText().equals("")) || (txtNewUserID.getText().equals(""))){JOptionPane.showMessageDialog(null, "Escribe un UserID/AID por favor.");return;}
+	    			switch(Type.getSelectedIndex()) {
+	    				case 0:
+	    	    			sentencia = conexion.createStatement();
+	    	    			ResultSet rs = sentencia.executeQuery("Select * FROM Account WHERE UserID='" + txtUserEdit.getText() + "'");
+	    	    			if(rs.next()) {
+	    	    				sentencia.executeUpdate("UPDATE Account SET UserID='" + txtNewUserID.getText() + "' where UserID='" + txtUserEdit.getText() + "'");
+	    	    				sentencia.executeUpdate("UPDATE Login SET UserID='" + txtNewUserID.getText() + "' where UserID='" + txtUserEdit.getText() + "'");
+		    	    			a.MsgCon(txtNewUserID.getText()); 
+		    	    			JOptionPane.showMessageDialog(null, "UserID cambiado exitosamente.");
+	    	    			}
+	    				break;
+	    				case 1:
+	    	    			/*sentencia = conexion.createStatement();
+	    	    			if(!txtInfoEventCoins.getText().equals("noInfo")) {
+	    	    				sentencia.executeUpdate("UPDATE Account SET EventCoins=" + Integer.parseInt(txtNewECoins.getText()) + "where AID=" + Integer.parseInt(txtUserEventCEdit.getText()));
+	    	    				System.out.println(txtNewECoins.getText()); JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
+	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de EventCoins con AID");return;}*/
+	    				break;
+	    			}
+    		}catch(SQLException e) {a.MsgCon("2No se pudo actualizar EventCoins " + e); return;}
+    	}
     }
 
     public void EditPassword (JComboBox<?> Type, JTextField txtPasswordEdit, JTextField txtNewPassword) {
@@ -578,11 +608,11 @@ public class Conn {
     	
     }
     
-    public void SendItemAccount (JComboBox Type, JTextField txtUserID, JTextField txtItemID, JTextField txtDays	) {
+    public void SendItemAccount (JComboBox<?> Type, JTextField txtUserID, JTextField txtItemID, JTextField txtDays	) {
     	
     }
     
-    public void EditCountry (JComboBox Type, JTextField txtUserID, JTextField txtNewCountry) {
+    public void EditCountry (JComboBox<?> Type, JTextField txtUserID, JTextField txtNewCountry) {
     	
     }
     

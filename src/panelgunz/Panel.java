@@ -49,8 +49,8 @@ public class Panel extends JFrame {
 	private JTextField txtUserEventCEdit;
 	private JTextField txtInfoEventCoins;
 	private JTextField txtNewECoins;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField txtUserEdit;
+	private JTextField txtNewUserID;
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
@@ -115,26 +115,26 @@ public class Panel extends JFrame {
 		lblNewLabel_3.setBounds(123, 38, 10, 14);
 		panel.add(lblNewLabel_3);
 		
-		textField = new JTextField();
-		textField.setFocusTraversalPolicyProvider(true);
-		textField.setFocusCycleRoot(true);
-		textField.setBounds(133, 35, 136, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtUserEdit = new JTextField();
+		txtUserEdit.setFocusTraversalPolicyProvider(true);
+		txtUserEdit.setFocusCycleRoot(true);
+		txtUserEdit.setBounds(133, 35, 136, 20);
+		panel.add(txtUserEdit);
+		txtUserEdit.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"UserID", "AID"}));
-		comboBox.setBounds(24, 35, 89, 20);
-		panel.add(comboBox);
+		JComboBox CBDUserIDTypeEdit = new JComboBox();
+		CBDUserIDTypeEdit.setModel(new DefaultComboBoxModel(new String[] {"UserID", "AID"}));
+		CBDUserIDTypeEdit.setBounds(24, 35, 89, 20);
+		panel.add(CBDUserIDTypeEdit);
 		
 		JLabel lblNewLabel_4 = new JLabel("Nueva UserID:");
 		lblNewLabel_4.setBounds(279, 38, 93, 14);
 		panel.add(lblNewLabel_4);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(382, 35, 187, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		txtNewUserID = new JTextField();
+		txtNewUserID.setBounds(382, 35, 187, 20);
+		panel.add(txtNewUserID);
+		txtNewUserID.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Cambiar");
 		btnNewButton.setBounds(579, 34, 89, 23);
@@ -534,38 +534,9 @@ public class Panel extends JFrame {
 		panel_4.setBackground(Color.WHITE);
 		panel_4.setBounds(27, 178, 645, 79);
 		PEventCoins.add(panel_4);
-		BEnviarDC.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				cnn.SendDCoins(CBDCoinsTypeSend.getSelectedIndex(),Integer.parseInt(txtDonatorCSend.getText()),  txtUserDC.getText());
-			}
-		});
-		BEnviarEC.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				cnn.SendECoins(CBECoinsSend.getSelectedIndex(),Integer.parseInt(txtDonatorCSend.getText()), txtUserDC.getText());
-			}
-		});
-		txtUserDonatorCEdit.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				cnn.GetEditDCoins(CBDCoinsTypeEdit, txtUserDonatorCEdit, txtInfoDonatorCoins, arg0);
-			}
-		});
-		txtUserEventCEdit.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				cnn.GetEditECoins(CBECoinsTypeEdit, txtUserEventCEdit, txtInfoEventCoins, arg0);
-			}
-		});
-		BEditDC.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				cnn.EditDCoins(CBDCoinsTypeEdit, txtUserDonatorCEdit, txtNewDCoins, txtInfoDonatorCoins);
-			}
-		});
-		BEditEC.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				cnn.EditECoins(CBECoinsTypeEdit, txtUserEventCEdit, txtNewECoins, txtInfoEventCoins);
-			}
-		});
+		
+		
+		
 		
 		JPanel PAccounts = new JPanel();
 		PAccounts.setBorder(new LineBorder(Color.LIGHT_GRAY));
@@ -708,6 +679,8 @@ public class Panel extends JFrame {
 		JButton BLogin = new JButton("Login");
 		BLogin.setBounds(10, 79, 230, 23);
 		PButtons.add(BLogin);
+		
+		//Botones del panel izquierdo
 		BLogout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				 Login lgn = new Login();
@@ -740,44 +713,92 @@ public class Panel extends JFrame {
 			}
 		});
 		
-				BLogin.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						PAccounts.setVisible(false);
-						PClan.setVisible(false);
-						PCoins.setVisible(false);
-						PEditAccounts.setVisible(false);
-						PLogin.setVisible(true);
-						cnn.Actualizar_Login(Table_Login);
-					}
-				});
-				BClan.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						PAccounts.setVisible(false);
-						PLogin.setVisible(false);
-						PCoins.setVisible(false);
-						PEditAccounts.setVisible(false);
-						PClan.setVisible(true);
-						cnn.Actualizar_Clan(Table_Clan);
-					}
-				});
-				BCoins.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						PAccounts.setVisible(false);
-						PLogin.setVisible(false);
-						PClan.setVisible(false);
-						PEditAccounts.setVisible(false);
-						PCoins.setVisible(true);
-					}
-				});
-				BEditAccounts.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						PAccounts.setVisible(false);
-						PLogin.setVisible(false);
-						PClan.setVisible(false);
-						PCoins.setVisible(false);
-						PEditAccounts.setVisible(true);
-					}
-				});
+		BLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PAccounts.setVisible(false);
+				PClan.setVisible(false);
+				PCoins.setVisible(false);
+				PEditAccounts.setVisible(false);
+				PLogin.setVisible(true);
+				cnn.Actualizar_Login(Table_Login);
+			}
+		});
+		BClan.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PAccounts.setVisible(false);
+				PLogin.setVisible(false);
+				PCoins.setVisible(false);
+				PEditAccounts.setVisible(false);
+				PClan.setVisible(true);
+				cnn.Actualizar_Clan(Table_Clan);
+			}
+		});
+		BCoins.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PAccounts.setVisible(false);
+				PLogin.setVisible(false);
+				PClan.setVisible(false);
+				PEditAccounts.setVisible(false);
+				PCoins.setVisible(true);
+			}
+		});
+		BEditAccounts.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PAccounts.setVisible(false);
+				PLogin.setVisible(false);
+				PClan.setVisible(false);
+				PCoins.setVisible(false);
+				PEditAccounts.setVisible(true);
+			}
+		});
+		
+				
+		//Botones dentro de panel derecho
+		
+
+		BEnviarDC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cnn.SendDCoins(CBDCoinsTypeSend.getSelectedIndex(),Integer.parseInt(txtDonatorCSend.getText()),  txtUserDC.getText());
+			}
+		});
+		BEnviarEC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cnn.SendECoins(CBECoinsSend.getSelectedIndex(),Integer.parseInt(txtDonatorCSend.getText()), txtUserDC.getText());
+			}
+		});
+		txtUserDonatorCEdit.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				cnn.GetEditDCoins(CBDCoinsTypeEdit, txtUserDonatorCEdit, txtInfoDonatorCoins, arg0);
+			}
+		});
+		txtUserEventCEdit.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				cnn.GetEditECoins(CBECoinsTypeEdit, txtUserEventCEdit, txtInfoEventCoins, arg0);
+			}
+		});
+		BEditDC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cnn.EditDCoins(CBDCoinsTypeEdit, txtUserDonatorCEdit, txtNewDCoins, txtInfoDonatorCoins);
+			}
+		});
+		BEditEC.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cnn.EditECoins(CBECoinsTypeEdit, txtUserEventCEdit, txtNewECoins, txtInfoEventCoins);
+			}
+		});
+		
+		
+		//Panel Cambiar userID
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cnn.EditUserID(CBDUserIDTypeEdit, txtUserEdit, txtNewUserID);
+			}
+		});
+				
+				
+		//Accion cargar panel para actualizar datos de Admin
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent arg0) {
