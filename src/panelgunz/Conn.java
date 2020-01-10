@@ -497,7 +497,7 @@ public class Conn {
 	    	    			sentencia = conexion.createStatement();
 	    	    			if(!txtInfoDonatorCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + Integer.parseInt(txtNewDCoins.getText()) + "where UserID='" + txtUserDonatorCEdit.getText() + "'");
-	    	    				a.MsgBoxCon(null, new Object[] {txtNewDCoins.getText(), "DonatorCoins Actualizados"});
+	    	    				a.MsgBoxCon(null, new Object[] {"DonatorCoins Actualizados", txtNewDCoins.getText()});
 	    	    				//a.MsgCon(txtNewDCoins.getText());  //falta test
 	    	    				//a.MsgBox(null, "DonatorCoins Actualizados");
 	    	    			}else {a.MsgBox(null, "Actualiza información de DonatorCoins con UserID");return;}
@@ -506,7 +506,7 @@ public class Conn {
 	    	    			sentencia = conexion.createStatement();
 	    	    			if(!txtInfoDonatorCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + Integer.parseInt(txtNewDCoins.getText()) + "where AID=" + Integer.parseInt(txtUserDonatorCEdit.getText()));
-	    	    				a.MsgBoxCon(null, new Object[] {txtNewDCoins.getText(), "DonatorCoins Actualizados"});
+	    	    				a.MsgBoxCon(null, new Object[] {"DonatorCoins Actualizados", txtNewDCoins.getText()});
 	    	    				//a.MsgCon(txtNewDCoins.getText()); 
 	    	    				//a.MsgBox(null, "DonatorCoins Actualizados");
 	    	    			}else {a.MsgBox(null, "Actualiza información de DonatorCoins con AID");return;}
@@ -522,7 +522,7 @@ public class Conn {
 	    	    			}catch(SQLException e) {a.MsgBox(null, "2.1No se pudo obtener UserID " + e);return;}
 	    	    			if(!txtInfoDonatorCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + Integer.parseInt(txtNewDCoins.getText()) + "where UserID='" + _UserID + "'");
-	    	    				a.MsgBoxCon(null, new Object[] {txtNewDCoins.getText(), "DonatorCoins Actualizados"});
+	    	    				a.MsgBoxCon(null, new Object[] {"DonatorCoins Actualizados", txtNewDCoins.getText()});
 	    	    				//a.MsgCon(txtNewDCoins.getText()); 
 	    	    				//a.MsgBox(null, "DonatorCoins Actualizados");
 	    	    			}else {a.MsgBox(null, "Actualiza información de DonatorCoins con Character");return;}
