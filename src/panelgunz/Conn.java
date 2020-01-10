@@ -32,7 +32,7 @@ public class Conn {
                 connected=true;
             }
         } catch (ClassNotFoundException | SQLException ex ) {
-            System.out.println(ex.getMessage() + "1");
+        	a.MsgCon(ex.getMessage() + "1");
             connected=false;            
         } 
         return connected;
@@ -44,25 +44,25 @@ public class Conn {
             ResultSet rlst = sentencia.executeQuery("SELECT * FROM Account,Login where Login.UserID='" + USERID + "' and Login.Password='" + PASSWORD + "' and Account.UGradeID=255");
             if (rlst.next() & logged == false) {
             	 UGradeID = rlst.getInt("UGradeID");
-                System.out.println("Logged Grade:" + UGradeID);
+            	 a.MsgCon("Logged Grade:" + UGradeID);
                 logged = true;
             }else if(logged == true){
-                System.out.println("You are connected");
+            	a.MsgCon("You are connected");
                 return;
             }else if(USERID.equals("")){
-                System.out.println("Llena el campo de UserID");
+            	a.MsgCon("Llena el campo de UserID");
                 return;
             }else if(PASSWORD.equals("")){
-                System.out.println("Llena el campo de Password");
+            	a.MsgCon("Llena el campo de Password");
                 return;
             }
             else{
-                System.out.println("UserID or Password incorrect");
+            	a.MsgCon("UserID or Password incorrect");
                 return;
             }
         }
         catch(SQLException e){
-            System.out.println(e.getMessage() + "2");
+        	a.MsgCon(e.getMessage() + "2");
         }
     }
     
@@ -75,7 +75,7 @@ public class Conn {
             }
         }
         catch(SQLException e){
-            System.out.println(e.getMessage() + "3");
+        	a.MsgCon(e.getMessage() + "3");
         }
         return 0;
     }
@@ -215,7 +215,7 @@ public class Conn {
                     VTLogin(dtm, i,rlst);    				
     			}
     		}
-    		}catch(Exception e) {System.out.println("No se pudo cargar los datos de Login, " +e);}
+    		}catch(Exception e) {a.MsgCon("No se pudo cargar los datos de Login, " +e);}
     	}
     }
     public void Actualizar_Clan(JTable Table_Clan) {
@@ -241,7 +241,7 @@ public class Conn {
     					VTClan(dtm, i, rlst);
     				}
     			}
-    		}catch(SQLException e) {System.out.println("No se pudo cargar los datos de Clan, " +e);}
+    		}catch(SQLException e) {a.MsgCon("No se pudo cargar los datos de Clan, " +e);}
     	}
     }
     public void SendDCoins(int Type, int dCoins, String txtUser) {
@@ -257,15 +257,15 @@ public class Conn {
 	    				_dCoins = rlst.getInt("DonatorCoins");
 	    			else
 	    				JOptionPane.showMessageDialog(null, "No existe usuario");
-	    			System.out.println(_dCoins);
+	    			a.MsgCon(_dCoins);
     				_dCoins = _dCoins + dCoins;
 	    			
-	    		}catch(SQLException e) {System.out.println("1.1No se pudo enviar DonatorCoins, " +e);}
+	    		}catch(SQLException e) {a.MsgCon("1.1No se pudo enviar DonatorCoins, " +e);}
 	    		try {
 	    			sentencia = (Statement) conexion.createStatement();
 	    			sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + _dCoins + "where UserID='" + txtUser + "'");
-	    			System.out.println(_dCoins);
-	    		}catch(SQLException e) {System.out.println("1.2No se pudo enviar DonatorCoins, " +e);}
+	    			a.MsgCon(_dCoins);
+	    		}catch(SQLException e) {a.MsgCon("1.2No se pudo enviar DonatorCoins, " +e);}
 				break;
 			case 1:
 				try {
@@ -275,15 +275,15 @@ public class Conn {
 	    				_dCoins = rlst.getInt("DonatorCoins");
 	    			else
 	    				JOptionPane.showMessageDialog(null, "No existe usuario");
-	    			System.out.println(_dCoins);
+	    			a.MsgCon(_dCoins);
     				_dCoins = _dCoins + dCoins;
 	    			
-	    		}catch(SQLException e) {System.out.println("2.1No se pudo enviar DonatorCoins, " +e);}
+	    		}catch(SQLException e) {a.MsgCon("2.1No se pudo enviar DonatorCoins, " +e);}
 	    		try {
 	    			sentencia = (Statement) conexion.createStatement();
 	    			sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + _dCoins + "where AID='" + txtUser + "'");
-	    			System.out.println(_dCoins);
-	    		}catch(SQLException e) {System.out.println("2.2No se pudo enviar DonatorCoins, " +e);}
+	    			a.MsgCon(_dCoins);
+	    		}catch(SQLException e) {a.MsgCon("2.2No se pudo enviar DonatorCoins, " +e);}
 				break;
 			case 2:
 				try {
@@ -294,15 +294,15 @@ public class Conn {
 	    				userid = rlst.getString("UserID");}
 	    			else
 	    				JOptionPane.showMessageDialog(null, "No existe usuario");
-	    			System.out.println(_dCoins);
+	    			a.MsgCon(_dCoins);
     				_dCoins = _dCoins + dCoins;
 	    			
-	    		}catch(SQLException e) {System.out.println("3.1No se pudo enviar DonatorCoins, " +e);}
+	    		}catch(SQLException e) {a.MsgCon("3.1No se pudo enviar DonatorCoins, " +e);}
 	    		try {
 	    			sentencia = (Statement) conexion.createStatement();
 	    			sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + _dCoins + "where UserID='" + userid + "'");
-	    			System.out.println(_dCoins);
-	    		}catch(SQLException e) {System.out.println("3.2No se pudo enviar DonatorCoins, " +e);}
+	    			a.MsgCon(_dCoins);
+	    		}catch(SQLException e) {a.MsgCon("3.2No se pudo enviar DonatorCoins, " +e);}
 				break;
 			}
     		
@@ -321,15 +321,15 @@ public class Conn {
 	    				_eCoins = rlst.getInt("EventCoins");
 	    			else
 	    				JOptionPane.showMessageDialog(null, "No existe usuario");
-	    			System.out.println(_eCoins);
+	    			a.MsgCon(_eCoins);
     				_eCoins = _eCoins + eCoins;
 	    			
-	    		}catch(SQLException e) {System.out.println("1.1No se pudo enviar EventCoins, " +e);}
+	    		}catch(SQLException e) {a.MsgCon("1.1No se pudo enviar EventCoins, " +e);}
 	    		try {
 	    			sentencia = (Statement) conexion.createStatement();
 	    			sentencia.executeUpdate("UPDATE Account SET EventCoins=" + _eCoins + "where UserID='" + txtUser + "'");
-	    			System.out.println(_eCoins);
-	    		}catch(SQLException e) {System.out.println("1.2No se pudo enviar EventCoins, " +e);}
+	    			a.MsgCon(_eCoins);
+	    		}catch(SQLException e) {a.MsgCon("1.2No se pudo enviar EventCoins, " +e);}
 				break;
 			case 1:
 				try {
@@ -339,15 +339,15 @@ public class Conn {
 	    				_eCoins = rlst.getInt("EventCoins");
 	    			else
 	    				JOptionPane.showMessageDialog(null, "No existe usuario");
-	    			System.out.println(_eCoins);
+	    			a.MsgCon(_eCoins);
     				_eCoins = _eCoins + eCoins;
 	    			
-	    		}catch(SQLException e) {System.out.println("2.1No se pudo enviar EventCoins, " +e);}
+	    		}catch(SQLException e) {a.MsgCon("2.1No se pudo enviar EventCoins, " +e);}
 	    		try {
 	    			sentencia = (Statement) conexion.createStatement();
 	    			sentencia.executeUpdate("UPDATE Account SET EventCoins=" + _eCoins + "where AID='" + txtUser + "'");
-	    			System.out.println(_eCoins);
-	    		}catch(SQLException e) {System.out.println("2.2No se pudo enviar EventCoins, " +e);}
+	    			a.MsgCon(_eCoins);
+	    		}catch(SQLException e) {a.MsgCon("2.2No se pudo enviar EventCoins, " +e);}
 				break;
 			case 2:
 				try {
@@ -358,15 +358,15 @@ public class Conn {
 	    				userid = rlst.getString("UserID");}
 	    			else
 	    				JOptionPane.showMessageDialog(null, "No existe usuario");
-	    			System.out.println(_eCoins);
+	    			a.MsgCon(_eCoins);
     				_eCoins = _eCoins + eCoins;
 	    			
-	    		}catch(SQLException e) {System.out.println("3.1No se pudo enviar EventCoins, " +e);}
+	    		}catch(SQLException e) {a.MsgCon("3.1No se pudo enviar EventCoins, " +e);}
 	    		try {
 	    			sentencia = (Statement) conexion.createStatement();
 	    			sentencia.executeUpdate("UPDATE Account SET EventCoins=" + _eCoins + "where UserID='" + userid + "'");
-	    			System.out.println(_eCoins);
-	    		}catch(SQLException e) {System.out.println("3.2No se pudo enviar EventCoins, " +e);}
+	    			a.MsgCon(_eCoins);
+	    		}catch(SQLException e) {a.MsgCon("3.2No se pudo enviar EventCoins, " +e);}
 				break;
 			}
     		
@@ -383,7 +383,7 @@ public class Conn {
 	    			ResultSet rlst = sentencia.executeQuery("SELECT * FROM Account where UserID='" + txtUserDonatorCEdit.getText() + "'");
 	    			if(rlst.next()) {
 	    				_dCoins = rlst.getInt("DonatorCoins");
-		    			System.out.println(_dCoins);
+	    				a.MsgCon(_dCoins);
 		    				if(arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 		    					txtInfoDonatorCoins.setText(Integer.toString(_dCoins));
 		    			}
@@ -391,7 +391,7 @@ public class Conn {
 							txtInfoDonatorCoins.setText("noInfo");
 						}}
 					}
-				}catch(SQLException e) {System.out.println("1.1No se pudo encontrar DonatorCoins, " +e);}
+				}catch(SQLException e) {a.MsgCon("1.1No se pudo encontrar DonatorCoins, " +e);}
 				break;
 			case 1:
 				try {
@@ -400,7 +400,7 @@ public class Conn {
 	    			ResultSet rlst = sentencia.executeQuery("SELECT * FROM Account where AID=" + txtUserDonatorCEdit.getText());
 	    			if(rlst.next()) {
 	    				_dCoins = rlst.getInt("DonatorCoins");
-		    			System.out.println(_dCoins);
+	    				a.MsgCon(_dCoins);
 	    				if(arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 	    					txtInfoDonatorCoins.setText(Integer.toString(_dCoins));
 			    		}
@@ -408,7 +408,7 @@ public class Conn {
 								txtInfoDonatorCoins.setText("noInfo");
 						}}
 					}
-	    		}catch(SQLException e) {System.out.println("2.1No se pudo encontrar DonatorCoins, " +e);}
+	    		}catch(SQLException e) {a.MsgCon("2.1No se pudo encontrar DonatorCoins, " +e);}
 				break;
 			case 2:
 				try {
@@ -417,7 +417,7 @@ public class Conn {
 	    			ResultSet rlst = sentencia.executeQuery("SELECT * FROM Account,Character where Character.Name='" + txtUserDonatorCEdit.getText() + "' and Character.AID=Account.AID");
 	    			if(rlst.next()) {
 	    				_dCoins = rlst.getInt("DonatorCoins");
-		    			System.out.println(_dCoins);
+	    				a.MsgCon(_dCoins);
 	    				if(arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 	    					txtInfoDonatorCoins.setText(Integer.toString(_dCoins));
 						}
@@ -425,7 +425,7 @@ public class Conn {
 							txtInfoDonatorCoins.setText("noInfo");
 						}}
 					}
-	    		}catch(SQLException e) {System.out.println("1.1No se pudo encontrar DonatorCoins, " +e);}
+	    		}catch(SQLException e) {a.MsgCon("1.1No se pudo encontrar DonatorCoins, " +e);}
 				break;
 			}
     	}
@@ -441,7 +441,7 @@ public class Conn {
 	    			ResultSet rlst = sentencia.executeQuery("SELECT * FROM Account where UserID='" + txtUserEventCEdit.getText() + "'");
 	    			if(rlst.next()) {
 	    				_dCoins = rlst.getInt("EventCoins");
-		    			System.out.println(_dCoins);
+	    				a.MsgCon(_dCoins);
 		    				if(arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 		    					txtInfoEventCoins.setText(Integer.toString(_dCoins));
 		    			}
@@ -449,7 +449,7 @@ public class Conn {
 							txtInfoEventCoins.setText("noInfo");
 						}}
 					}
-				}catch(SQLException e) {System.out.println("1.1No se pudo encontrar EventCoins, " +e);}
+				}catch(SQLException e) {a.MsgCon("1.1No se pudo encontrar EventCoins, " +e);}
 				break;
 			case 1:
 				try {
@@ -458,7 +458,7 @@ public class Conn {
 	    			ResultSet rlst = sentencia.executeQuery("SELECT * FROM Account where AID=" + txtUserEventCEdit.getText());
 	    			if(rlst.next()) {
 	    				_dCoins = rlst.getInt("EventCoins");
-		    			System.out.println(_dCoins);
+	    				a.MsgCon(_dCoins);
 	    				if(arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 	    					txtInfoEventCoins.setText(Integer.toString(_dCoins));
 			    		}
@@ -466,7 +466,7 @@ public class Conn {
 		    				txtInfoEventCoins.setText("noInfo");
 						}}
 					}
-	    		}catch(SQLException e) {System.out.println("2.1No se pudo encontrar EventCoins, " +e);}
+	    		}catch(SQLException e) {a.MsgCon("2.1No se pudo encontrar EventCoins, " +e);}
 				break;
 			case 2:
 				try {
@@ -475,7 +475,7 @@ public class Conn {
 	    			ResultSet rlst = sentencia.executeQuery("SELECT * FROM Account,Character where Character.Name='" + txtUserEventCEdit.getText() + "' and Character.AID=Account.AID");
 	    			if(rlst.next()) {
 	    				_dCoins = rlst.getInt("EventCoins");
-		    			System.out.println(_dCoins);
+	    				a.MsgCon(_dCoins);
 	    				if(arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 	    					txtInfoEventCoins.setText(Integer.toString(_dCoins));
 						}
@@ -483,7 +483,7 @@ public class Conn {
 		    				txtInfoEventCoins.setText("noInfo");
 						}}
 					}
-	    		}catch(SQLException e) {System.out.println("1.1No se pudo encontrar EventCoins, " +e);}
+	    		}catch(SQLException e) {a.MsgCon("1.1No se pudo encontrar EventCoins, " +e);}
 				break;
 			}
     	}
@@ -497,7 +497,7 @@ public class Conn {
 	    	    			sentencia = conexion.createStatement();
 	    	    			if(!txtInfoDonatorCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + Integer.parseInt(txtNewDCoins.getText()) + "where UserID='" + txtUserDonatorCEdit.getText() + "'");
-	    	    				System.out.println(txtNewDCoins.getText()); 
+	    	    				a.MsgCon(txtNewDCoins.getText()); 
 	    	    				JOptionPane.showMessageDialog(null, "DonatorCoins Actualizados");
 	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de DonatorCoins con UserID");return;}
 	    				break;
@@ -505,7 +505,7 @@ public class Conn {
 	    	    			sentencia = conexion.createStatement();
 	    	    			if(!txtInfoDonatorCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + Integer.parseInt(txtNewDCoins.getText()) + "where AID=" + Integer.parseInt(txtUserDonatorCEdit.getText()));
-	    	    				System.out.println(txtNewDCoins.getText()); 
+	    	    				a.MsgCon(txtNewDCoins.getText()); 
 	    	    				JOptionPane.showMessageDialog(null, "DonatorCoins Actualizados");
 	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de DonatorCoins con AID");return;}
 	    				break;
@@ -520,12 +520,12 @@ public class Conn {
 	    	    			}catch(SQLException e) {JOptionPane.showMessageDialog(null, "2.1No se pudo obtener UserID " + e);return;}
 	    	    			if(!txtInfoDonatorCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + Integer.parseInt(txtNewDCoins.getText()) + "where UserID='" + _UserID + "'");
-	    	    				System.out.println(txtNewDCoins.getText()); 
+	    	    				a.MsgCon(txtNewDCoins.getText()); 
 	    	    				JOptionPane.showMessageDialog(null, "DonatorCoins Actualizados");
 	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de DonatorCoins con Character");return;}
 	    				break;
 	    			}
-    		}catch(SQLException e) {System.out.println("1No se pudo actualizar DonatorCoins " + e);}
+    		}catch(SQLException e) {a.MsgCon("1No se pudo actualizar DonatorCoins " + e);}
     	}
     }
     public void EditECoins(JComboBox<?> Type, JTextField txtUserEventCEdit, JTextField txtNewECoins, JTextField txtInfoEventCoins) {
@@ -537,7 +537,7 @@ public class Conn {
 	    	    			sentencia = conexion.createStatement();
 	    	    			if(!txtInfoEventCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET EventCoins=" + Integer.parseInt(txtNewECoins.getText()) + "where UserID='" + txtUserEventCEdit.getText() + "'");
-	    	    				System.out.println(txtNewECoins.getText()); 
+	    	    				a.MsgCon(txtNewECoins.getText()); 
 	    	    				JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
 	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de EventCoins con UserID");return;}
 	    				break;
@@ -545,7 +545,7 @@ public class Conn {
 	    	    			sentencia = conexion.createStatement();
 	    	    			if(!txtInfoEventCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET EventCoins=" + Integer.parseInt(txtNewECoins.getText()) + "where AID=" + Integer.parseInt(txtUserEventCEdit.getText()));
-	    	    				System.out.println(txtNewECoins.getText()); 
+	    	    				a.MsgCon(txtNewECoins.getText()); 
 	    	    				JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
 	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de EventCoins con AID");return;}
 	    				break;
@@ -560,12 +560,12 @@ public class Conn {
 	    	    			}catch(SQLException e) {JOptionPane.showMessageDialog(null, "2.1No se pudo obtener UserID " + e);return;}
 	    	    			if(!txtInfoEventCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET EventCoins=" + Integer.parseInt(txtNewECoins.getText()) + "where UserID='" + _UserID + "'");
-	    	    				System.out.println(txtNewECoins.getText()); 
+	    	    				a.MsgCon(txtNewECoins.getText()); 
 	    	    				JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
 	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de EventCoins con Character");return;}
 	    				break;
 	    			}
-    		}catch(SQLException e) {System.out.println("1No se pudo actualizar EventCoins " + e);}
+    		}catch(SQLException e) {a.MsgCon("1No se pudo actualizar EventCoins " + e);}
     	}
     }    
     
@@ -588,7 +588,7 @@ public class Conn {
 	    	    			/*sentencia = conexion.createStatement();
 	    	    			if(!txtInfoEventCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET EventCoins=" + Integer.parseInt(txtNewECoins.getText()) + "where AID=" + Integer.parseInt(txtUserEventCEdit.getText()));
-	    	    				System.out.println(txtNewECoins.getText()); JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
+	    	    				a.MsgCon(txtNewECoins.getText()); JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
 	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de EventCoins con AID");return;}*/
 	    				break;
 	    			}

@@ -1,6 +1,5 @@
 package panelgunz;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -10,7 +9,7 @@ public class Action {
 	public void MsgBox(String text) {
 		JOptionPane.showMessageDialog(null, text);
 	}
-	public void MsgCon(String text) {
+	public void MsgCon(Object text) {
 		System.out.println(text); 
 	}
 	public void MsgBoxCon(String[] text) {
