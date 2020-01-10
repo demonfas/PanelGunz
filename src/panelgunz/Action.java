@@ -1,19 +1,21 @@
 package panelgunz;
 
+import java.awt.Component;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
+
 public class Action {
-	public void MsgBox(String text) {
-		JOptionPane.showMessageDialog(null, text);
+	public void MsgBox(Component _null,Object text) {
+		JOptionPane.showMessageDialog(_null, text);
 	}
 	public void MsgCon(Object text) {
 		System.out.println(text); 
 	}
-	public void MsgBoxCon(String[] text) {
-		JOptionPane.showMessageDialog(null, text[0]);
+	public void MsgBoxCon(Component _null, Object[] text) {
+		JOptionPane.showMessageDialog(_null, text[0]);
 		System.out.println(text[1]); 
 	}
 	public void Update(Statement sentencia, String[] SQLQuery) {

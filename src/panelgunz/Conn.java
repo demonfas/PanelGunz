@@ -157,7 +157,7 @@ public class Conn {
                     hideRows(Table_AllAccounts, 12, 23);
                     showRows(Table_AllAccounts, 0, 11);
                 }
-            } catch (SQLException e) {JOptionPane.showMessageDialog(Table_AllAccounts, "4 No se pudo cargar los datos de Accounts: "+e);} 
+            } catch (SQLException e) {a.MsgBox(Table_AllAccounts, "4 No se pudo cargar los datos de Accounts: "+e);} 
         }
     }
     public void Actualizar_Characters(JTable Table_AllCharacters){
@@ -189,7 +189,7 @@ public class Conn {
                     hideRows(Table_AllCharacters, 0, 11);
                     showRows(Table_AllCharacters, 12, 23);
                 }
-            }catch(SQLException e){JOptionPane.showMessageDialog(Table_AllCharacters, "5 No se pudo cargar los datos de Characters: "+e);}
+            }catch(SQLException e){a.MsgBox(Table_AllCharacters, "5 No se pudo cargar los datos de Characters: "+e);}
         }
     }
     public void Actualizar_Login(JTable Table_Login) {
@@ -256,7 +256,7 @@ public class Conn {
 	    			if(rlst.next()) 
 	    				_dCoins = rlst.getInt("DonatorCoins");
 	    			else
-	    				JOptionPane.showMessageDialog(null, "No existe usuario");
+	    				a.MsgBox(null, "No existe usuario");
 	    			a.MsgCon(_dCoins);
     				_dCoins = _dCoins + dCoins;
 	    			
@@ -274,7 +274,7 @@ public class Conn {
 	    			if(rlst.next()) 
 	    				_dCoins = rlst.getInt("DonatorCoins");
 	    			else
-	    				JOptionPane.showMessageDialog(null, "No existe usuario");
+	    				a.MsgBox(null, "No existe usuario");
 	    			a.MsgCon(_dCoins);
     				_dCoins = _dCoins + dCoins;
 	    			
@@ -293,7 +293,7 @@ public class Conn {
 	    				_dCoins = rlst.getInt("DonatorCoins");
 	    				userid = rlst.getString("UserID");}
 	    			else
-	    				JOptionPane.showMessageDialog(null, "No existe usuario");
+	    				a.MsgBox(null, "No existe usuario");
 	    			a.MsgCon(_dCoins);
     				_dCoins = _dCoins + dCoins;
 	    			
@@ -320,7 +320,7 @@ public class Conn {
 	    			if(rlst.next()) 
 	    				_eCoins = rlst.getInt("EventCoins");
 	    			else
-	    				JOptionPane.showMessageDialog(null, "No existe usuario");
+	    				a.MsgBox(null, "No existe usuario");
 	    			a.MsgCon(_eCoins);
     				_eCoins = _eCoins + eCoins;
 	    			
@@ -338,7 +338,7 @@ public class Conn {
 	    			if(rlst.next()) 
 	    				_eCoins = rlst.getInt("EventCoins");
 	    			else
-	    				JOptionPane.showMessageDialog(null, "No existe usuario");
+	    				a.MsgBox(null, "No existe usuario");
 	    			a.MsgCon(_eCoins);
     				_eCoins = _eCoins + eCoins;
 	    			
@@ -357,7 +357,7 @@ public class Conn {
 	    				_eCoins = rlst.getInt("EventCoins");
 	    				userid = rlst.getString("UserID");}
 	    			else
-	    				JOptionPane.showMessageDialog(null, "No existe usuario");
+	    				a.MsgBox(null, "No existe usuario");
 	    			a.MsgCon(_eCoins);
     				_eCoins = _eCoins + eCoins;
 	    			
@@ -491,23 +491,25 @@ public class Conn {
     public void EditDCoins(JComboBox<?> Type, JTextField txtUserDonatorCEdit, JTextField txtNewDCoins, JTextField txtInfoDonatorCoins) {
     	if(try_c()) {
     		try {
-				if(txtNewDCoins.getText().equals("")){JOptionPane.showMessageDialog(null, "Escribe una cantidad de Coins");return;}
+				if(txtNewDCoins.getText().equals("")){a.MsgBox(null, "Escribe una cantidad de Coins");return;}
 	    			switch(Type.getSelectedIndex()) {
 	    				case 0:
 	    	    			sentencia = conexion.createStatement();
 	    	    			if(!txtInfoDonatorCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + Integer.parseInt(txtNewDCoins.getText()) + "where UserID='" + txtUserDonatorCEdit.getText() + "'");
-	    	    				a.MsgCon(txtNewDCoins.getText()); 
-	    	    				JOptionPane.showMessageDialog(null, "DonatorCoins Actualizados");
-	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de DonatorCoins con UserID");return;}
+	    	    				a.MsgBoxCon(null, new Object[] {txtNewDCoins.getText(), "DonatorCoins Actualizados"});
+	    	    				//a.MsgCon(txtNewDCoins.getText());  //falta test
+	    	    				//a.MsgBox(null, "DonatorCoins Actualizados");
+	    	    			}else {a.MsgBox(null, "Actualiza información de DonatorCoins con UserID");return;}
 	    				break;
 	    				case 1:
 	    	    			sentencia = conexion.createStatement();
 	    	    			if(!txtInfoDonatorCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + Integer.parseInt(txtNewDCoins.getText()) + "where AID=" + Integer.parseInt(txtUserDonatorCEdit.getText()));
-	    	    				a.MsgCon(txtNewDCoins.getText()); 
-	    	    				JOptionPane.showMessageDialog(null, "DonatorCoins Actualizados");
-	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de DonatorCoins con AID");return;}
+	    	    				a.MsgBoxCon(null, new Object[] {txtNewDCoins.getText(), "DonatorCoins Actualizados"});
+	    	    				//a.MsgCon(txtNewDCoins.getText()); 
+	    	    				//a.MsgBox(null, "DonatorCoins Actualizados");
+	    	    			}else {a.MsgBox(null, "Actualiza información de DonatorCoins con AID");return;}
 	    				break;
 	    				case 2:
 	    					String _UserID=null;
@@ -517,12 +519,13 @@ public class Conn {
 	    	    				if(rlst.next()) {
 	    	    					_UserID = rlst.getString("UserID");
 	    	    				}
-	    	    			}catch(SQLException e) {JOptionPane.showMessageDialog(null, "2.1No se pudo obtener UserID " + e);return;}
+	    	    			}catch(SQLException e) {a.MsgBox(null, "2.1No se pudo obtener UserID " + e);return;}
 	    	    			if(!txtInfoDonatorCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + Integer.parseInt(txtNewDCoins.getText()) + "where UserID='" + _UserID + "'");
-	    	    				a.MsgCon(txtNewDCoins.getText()); 
-	    	    				JOptionPane.showMessageDialog(null, "DonatorCoins Actualizados");
-	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de DonatorCoins con Character");return;}
+	    	    				a.MsgBoxCon(null, new Object[] {txtNewDCoins.getText(), "DonatorCoins Actualizados"});
+	    	    				//a.MsgCon(txtNewDCoins.getText()); 
+	    	    				//a.MsgBox(null, "DonatorCoins Actualizados");
+	    	    			}else {a.MsgBox(null, "Actualiza información de DonatorCoins con Character");return;}
 	    				break;
 	    			}
     		}catch(SQLException e) {a.MsgCon("1No se pudo actualizar DonatorCoins " + e);}
@@ -531,7 +534,7 @@ public class Conn {
     public void EditECoins(JComboBox<?> Type, JTextField txtUserEventCEdit, JTextField txtNewECoins, JTextField txtInfoEventCoins) {
     	if(try_c()) {
     		try {
-				if(txtNewECoins.getText().equals("")){JOptionPane.showMessageDialog(null, "Escribe una cantidad de Coins");return;}
+				if(txtNewECoins.getText().equals("")){a.MsgBox(null, "Escribe una cantidad de Coins");return;}
 	    			switch(Type.getSelectedIndex()) {
 	    				case 0:
 	    	    			sentencia = conexion.createStatement();
@@ -539,7 +542,7 @@ public class Conn {
 	    	    				sentencia.executeUpdate("UPDATE Account SET EventCoins=" + Integer.parseInt(txtNewECoins.getText()) + "where UserID='" + txtUserEventCEdit.getText() + "'");
 	    	    				a.MsgCon(txtNewECoins.getText()); 
 	    	    				JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
-	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de EventCoins con UserID");return;}
+	    	    			}else {a.MsgBox(null, "Actualiza información de EventCoins con UserID");return;}
 	    				break;
 	    				case 1:
 	    	    			sentencia = conexion.createStatement();
@@ -547,7 +550,7 @@ public class Conn {
 	    	    				sentencia.executeUpdate("UPDATE Account SET EventCoins=" + Integer.parseInt(txtNewECoins.getText()) + "where AID=" + Integer.parseInt(txtUserEventCEdit.getText()));
 	    	    				a.MsgCon(txtNewECoins.getText()); 
 	    	    				JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
-	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de EventCoins con AID");return;}
+	    	    			}else {a.MsgBox(null, "Actualiza información de EventCoins con AID");return;}
 	    				break;
 	    				case 2:
 	    					String _UserID=null;
@@ -557,12 +560,12 @@ public class Conn {
 	    	    				if(rlst.next()) {
 	    	    					_UserID = rlst.getString("UserID");
 	    	    				}
-	    	    			}catch(SQLException e) {JOptionPane.showMessageDialog(null, "2.1No se pudo obtener UserID " + e);return;}
+	    	    			}catch(SQLException e) {a.MsgBox(null, "2.1No se pudo obtener UserID " + e);return;}
 	    	    			if(!txtInfoEventCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET EventCoins=" + Integer.parseInt(txtNewECoins.getText()) + "where UserID='" + _UserID + "'");
 	    	    				a.MsgCon(txtNewECoins.getText()); 
 	    	    				JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
-	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de EventCoins con Character");return;}
+	    	    			}else {a.MsgBox(null, "Actualiza información de EventCoins con Character");return;}
 	    				break;
 	    			}
     		}catch(SQLException e) {a.MsgCon("1No se pudo actualizar EventCoins " + e);}
@@ -572,7 +575,7 @@ public class Conn {
     public void EditUserID (JComboBox<?> Type, JTextField txtUserEdit, JTextField txtNewUserID) {
     	if(try_c()) {
     		try {
-				if((txtUserEdit.getText().equals("")) || (txtNewUserID.getText().equals(""))){JOptionPane.showMessageDialog(null, "Escribe un UserID/AID por favor.");return;}
+				if((txtUserEdit.getText().equals("")) || (txtNewUserID.getText().equals(""))){a.MsgBox(null, "Escribe un UserID/AID por favor.");return;}
 	    			switch(Type.getSelectedIndex()) {
 	    				case 0:
 	    	    			sentencia = conexion.createStatement();
@@ -588,8 +591,9 @@ public class Conn {
 	    	    			/*sentencia = conexion.createStatement();
 	    	    			if(!txtInfoEventCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET EventCoins=" + Integer.parseInt(txtNewECoins.getText()) + "where AID=" + Integer.parseInt(txtUserEventCEdit.getText()));
-	    	    				a.MsgCon(txtNewECoins.getText()); JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
-	    	    			}else {JOptionPane.showMessageDialog(null, "Actualiza información de EventCoins con AID");return;}*/
+	    	    				a.MsgCon(txtNewECoins.getText()); 
+	    	    				JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
+	    	    			}else {a.MsgBox(null, "Actualiza información de EventCoins con AID");return;}*/
 	    				break;
 	    			}
     		}catch(SQLException e) {a.MsgCon("2No se pudo actualizar EventCoins " + e); return;}
