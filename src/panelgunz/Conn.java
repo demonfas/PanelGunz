@@ -497,8 +497,8 @@ public class Conn {
 	    	    			sentencia = conexion.createStatement();
 	    	    			if(!txtInfoDonatorCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET DonatorCoins=" + Integer.parseInt(txtNewDCoins.getText()) + "where UserID='" + txtUserDonatorCEdit.getText() + "'");
-	    	    				a.MsgBoxCon(null, new Object[] {"DonatorCoins Actualizados", txtNewDCoins.getText()});
-	    	    				//a.MsgCon(txtNewDCoins.getText());  //falta test
+	    	    				a.MsgBoxCon(null, new Object[] {"DonatorCoins Actualizados", txtNewDCoins.getText()}); //falta test
+	    	    				//a.MsgCon(txtNewDCoins.getText());  
 	    	    				//a.MsgBox(null, "DonatorCoins Actualizados");
 	    	    			}else {a.MsgBox(null, "Actualiza información de DonatorCoins con UserID");return;}
 	    				break;
@@ -540,16 +540,18 @@ public class Conn {
 	    	    			sentencia = conexion.createStatement();
 	    	    			if(!txtInfoEventCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET EventCoins=" + Integer.parseInt(txtNewECoins.getText()) + "where UserID='" + txtUserEventCEdit.getText() + "'");
-	    	    				a.MsgCon(txtNewECoins.getText()); 
-	    	    				JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
+	    	    				a.MsgBoxCon(null, new Object[] {"EventCoins Actualizados",txtNewECoins.getText()});//falta test
+	    	    				//a.MsgCon(txtNewECoins.getText()); 
+	    	    				//JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
 	    	    			}else {a.MsgBox(null, "Actualiza información de EventCoins con UserID");return;}
 	    				break;
 	    				case 1:
 	    	    			sentencia = conexion.createStatement();
 	    	    			if(!txtInfoEventCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET EventCoins=" + Integer.parseInt(txtNewECoins.getText()) + "where AID=" + Integer.parseInt(txtUserEventCEdit.getText()));
-	    	    				a.MsgCon(txtNewECoins.getText()); 
-	    	    				JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
+	    	    				a.MsgBoxCon(null, new Object[] {"EventCoins Actualizados",txtNewECoins.getText()});
+	    	    				//a.MsgCon(txtNewECoins.getText()); 
+	    	    				//JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
 	    	    			}else {a.MsgBox(null, "Actualiza información de EventCoins con AID");return;}
 	    				break;
 	    				case 2:
@@ -563,8 +565,9 @@ public class Conn {
 	    	    			}catch(SQLException e) {a.MsgBox(null, "2.1No se pudo obtener UserID " + e);return;}
 	    	    			if(!txtInfoEventCoins.getText().equals("noInfo")) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET EventCoins=" + Integer.parseInt(txtNewECoins.getText()) + "where UserID='" + _UserID + "'");
-	    	    				a.MsgCon(txtNewECoins.getText()); 
-	    	    				JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
+	    	    				a.MsgBoxCon(null, new Object[] {"EventCoins Actualizados",txtNewECoins.getText()});
+	    	    				//a.MsgCon(txtNewECoins.getText()); 
+	    	    				//JOptionPane.showMessageDialog(null, "EventCoins Actualizados");
 	    	    			}else {a.MsgBox(null, "Actualiza información de EventCoins con Character");return;}
 	    				break;
 	    			}
@@ -583,8 +586,9 @@ public class Conn {
 	    	    			if(rs.next()) {
 	    	    				sentencia.executeUpdate("UPDATE Account SET UserID='" + txtNewUserID.getText() + "' where UserID='" + txtUserEdit.getText() + "'");
 	    	    				sentencia.executeUpdate("UPDATE Login SET UserID='" + txtNewUserID.getText() + "' where UserID='" + txtUserEdit.getText() + "'");
-		    	    			a.MsgCon(txtNewUserID.getText()); 
-		    	    			JOptionPane.showMessageDialog(null, "UserID cambiado exitosamente.");
+		    	    			a.MsgBoxCon(null, new Object[] {"UserID cambiado exitosamente.", txtNewUserID.getText()}); //falta test
+	    	    				//a.MsgCon(txtNewUserID.getText()); 
+		    	    			//JOptionPane.showMessageDialog(null, "UserID cambiado exitosamente.");
 	    	    			}
 	    				break;
 	    				case 1:
